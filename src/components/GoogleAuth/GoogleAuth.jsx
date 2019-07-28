@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 class GoogleAuth extends Component {
   state = {
     isSignedIn: null
@@ -18,8 +20,12 @@ class GoogleAuth extends Component {
         });
     });
   }
-  onAuthChange = () => {
-    this.setState({ isSignedIn: this.auth.isSignedIn.get() });
+  onAuthChange = isSignedIn => {
+    if (isSignedIn) {
+      this.props.onSignIn();
+    } else {
+      this.props.onSignOut();
+    }
   };
 
   onSignInClick = () => {
@@ -52,5 +58,17 @@ class GoogleAuth extends Component {
     return <div>{this.renderAuthButton}</div>;
   }
 }
-
-export default GoogleAuth;
+const mapDispatchToProps = dispatch => {
+  return {
+    onSignIn: () => {
+      dispatch(actions.signIn);
+    },
+    onSignOut: () => {
+      dispatch(actions.signOut);
+    }
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(GoogleAuth);
