@@ -4,9 +4,10 @@ import * as actions from "../../store/actions/index";
 class GoogleAuth extends Component {
   componentDidMount() {
     window.gapi.load("client:auth2", () => {
-      window.gapi
+      window.gapi.client
         .init({
-          clientId: "",
+          clientId:
+            "221206019332-ahpq5ca6phundroevmr1qsirtoc0822d.apps.googleusercontent.com",
           scope: "email"
         })
         .then(() => {
@@ -27,13 +28,13 @@ class GoogleAuth extends Component {
   onSignInClick = () => {
     this.auth.signIn();
   };
-  onSignInClick = () => {
+  onSignOutClick = () => {
     this.auth.signOut();
   };
 
   renderAuthButton = () => {
     if (this.props.isSignedIn === null) {
-      return null;
+      return <div>IDK</div>;
     } else if (this.props.isSignedIn) {
       return (
         <button onClick={this.onSignOutClick} className="ui red google button">
@@ -51,7 +52,7 @@ class GoogleAuth extends Component {
     }
   };
   render() {
-    return <div>{this.renderAuthButton}</div>;
+    return <div>{this.renderAuthButton()}</div>;
   }
 }
 const mapStateToProps = state => {
