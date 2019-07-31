@@ -1,15 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, compose, applyMiddleware } from "redux";
+import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import { BrowserRouter } from "react-router-dom";
-import reducer from "./store/reducers/auth";
+import authReducer from "./store/reducers/auth";
+import { reducer as formReducer } from "redux-form";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(reducer, composeEnhancers(applyMiddleware()));
+const rootReducer = combineReducers({
+  auth: authReducer,
+  form: formReducer
+});
+
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware()));
 
 const app = (
   <Provider store={store}>
