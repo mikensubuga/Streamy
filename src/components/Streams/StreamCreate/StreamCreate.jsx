@@ -3,16 +3,13 @@ import { Field, reduxForm } from "redux-form";
 class StreamCreate extends Component {
   renderError({ error, touched }) {
     if (touched && error) {
-      return (
-        <div className="ui form error">
-          <div className="ui error message">{error}</div>
-        </div>
-      );
+      return <div className="ui error message">{error}</div>;
     }
   }
   renderInput = ({ input, label, meta }) => {
+    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
     return (
-      <div className="field">
+      <div className={className}>
         <label>{label}</label>
         <input {...input} />
         {this.renderError(meta)}
@@ -23,12 +20,13 @@ class StreamCreate extends Component {
     console.log(formValues);
   }
   render() {
+    console.log("render", this.props);
     return (
       <div>
         <div>StreamCreate</div>
         <form
           onSubmit={this.props.handleSubmit(this.onSubmit)}
-          className="ui form"
+          className="ui form error"
         >
           <Field
             name="title"
@@ -40,7 +38,9 @@ class StreamCreate extends Component {
             component={this.renderInput}
             label="Enter Description"
           />
-          <button className="ui button primary">Submit</button>
+          <button className="ui button primary" disabled={this.props.invalid}>
+            Submit
+          </button>
         </form>
       </div>
     );
