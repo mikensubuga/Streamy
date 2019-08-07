@@ -18,9 +18,10 @@ class StreamCreate extends Component {
       </div>
     );
   };
-  onSubmit(formValues) {
+  onSubmit = formValues => {
     console.log(formValues);
-  }
+    this.props.onSubmit(formValues);
+  };
   render() {
     console.log("render", this.props);
     return (
@@ -60,7 +61,14 @@ const validate = formValues => {
   return errors;
 };
 
-export default reduxForm({
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmit: formValues => dispatch(actions.createStream(formValues))
+  };
+};
+const formWrapped = reduxForm({
   form: "streamCreate",
   validate: validate
 })(StreamCreate);
+
+export default connect(null)(formWrapped);
