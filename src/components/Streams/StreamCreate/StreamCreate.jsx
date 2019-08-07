@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions/index";
 class StreamCreate extends Component {
   renderError({ error, touched }) {
     if (touched && error) {
@@ -23,7 +25,7 @@ class StreamCreate extends Component {
     console.log("render", this.props);
     return (
       <div>
-        <div>StreamCreate</div>
+        <h2 className="ui block header">StreamCreate</h2>
         <form
           onSubmit={this.props.handleSubmit(this.onSubmit)}
           className="ui form error"
