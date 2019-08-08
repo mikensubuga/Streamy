@@ -5,6 +5,7 @@ import { createStore, compose, applyMiddleware, combineReducers } from "redux";
 import { BrowserRouter } from "react-router-dom";
 import authReducer from "./store/reducers/auth";
 import { reducer as formReducer } from "redux-form";
+import thunk from "redux-thunk";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -15,7 +16,10 @@ const rootReducer = combineReducers({
   form: formReducer
 });
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware()));
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 const app = (
   <Provider store={store}>
