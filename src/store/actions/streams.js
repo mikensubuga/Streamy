@@ -29,6 +29,7 @@ export const createStream = formValues => {
       })
       .catch(err => {
         dispatch(createStreamFail(err));
+        console.log("err msg ", err);
       });
   };
 };
