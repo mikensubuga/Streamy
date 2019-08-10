@@ -32,3 +32,139 @@ export const createStream = formValues => {
       });
   };
 };
+
+export const fetchStreamsStart = () => {
+  return {
+    type: actionTypes.FETCH_STREAMS_START
+  };
+};
+
+export const fetchStreamsSuccess = streams => {
+  return {
+    type: actionTypes.FETCH_STREAMS_SUCCESS,
+    streams: streams
+  };
+};
+
+export const fetchStreamsFail = error => {
+  return {
+    type: actionTypes.FETCH_STREAMS_FAIL,
+    error: error
+  };
+};
+
+export const fetchStreams = () => {
+  return dispatch => {
+    dispatch(fetchStreamsStart());
+    streams
+      .get("/streams")
+      .then(res => {
+        dispatch(fetchStreamsSuccess(res.data));
+      })
+      .catch(err => {
+        dispatch(fetchStreamsFail(err));
+      });
+  };
+};
+
+export const fetchStreamStart = () => {
+  return {
+    type: actionTypes.FETCH_STREAM_START
+  };
+};
+
+export const fetchStreamSuccess = stream => {
+  return {
+    type: actionTypes.FETCH_STREAM_SUCCESS,
+    stream: stream
+  };
+};
+
+export const fetchStreamFail = error => {
+  return {
+    type: actionTypes.FETCH_STREAM_FAIL,
+    error: error
+  };
+};
+
+export const fetchStream = id => {
+  return dispatch => {
+    dispatch(fetchStreamStart());
+    streams
+      .get(`/streams/${id}`)
+      .then(res => {
+        dispatch(fetchStreamSuccess(res.data));
+      })
+      .catch(err => {
+        dispatch(fetchStreamFail(err));
+      });
+  };
+};
+
+export const editStreamStart = () => {
+  return {
+    type: actionTypes.EDIT_STREAM_START
+  };
+};
+
+export const editStreamSuccess = response => {
+  return {
+    type: actionTypes.EDIT_STREAM_SUCCESS,
+    response: response
+  };
+};
+
+export const editStreamFail = error => {
+  return {
+    type: actionTypes.EDIT_STREAM_FAIL,
+    error: error
+  };
+};
+
+export const editStream = (id, formValues) => {
+  return dispatch => {
+    dispatch(editStreamStart());
+    streams
+      .put(`/streams/${id}`, formValues)
+      .then(res => {
+        dispatch(editStreamSuccess(res.data));
+      })
+      .catch(err => {
+        dispatch(editStreamFail(err));
+      });
+  };
+};
+
+export const deleteStreamStart = () => {
+  return {
+    type: actionTypes.DELETE_STREAM_START
+  };
+};
+
+export const deleteStreamSuccess = res => {
+  return {
+    type: actionTypes.DELETE_STREAM_SUCCESS,
+    res: res
+  };
+};
+
+export const deleteStreamFail = error => {
+  return {
+    type: actionTypes.DELETE_STREAM_FAIL,
+    error: error
+  };
+};
+
+export const deleteStream = id => {
+  return dispatch => {
+    dispatch(deleteStreamStart());
+    streams
+      .delete(`/streams/${id}`)
+      .then(res => {
+        dispatch(deleteStreamSuccess(res.data));
+      })
+      .catch(err => {
+        dispatch(deleteStreamFail(err));
+      });
+  };
+};
