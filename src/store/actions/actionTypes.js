@@ -1,2 +1,7 @@
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
+
+export const CREATE_STREAM = "CREATE_STREAM";
+export const CREATE_STREAM_START = "CREATE_STREAM_START";
+export const CREATE_STREAM_SUCCESS = "CREATE_STREAM_SUCCESS";
+export const CREATE_STREAM_FAIL = "CREATE_STREAM_FAIL";
