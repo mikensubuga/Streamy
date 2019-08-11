@@ -29,6 +29,30 @@ const reducer = (state = initialState, action) => {
         loading: false,
         error: true
       };
+
+      case actionTypes.FETCH_STREAM_START:
+        return {
+          ...state,
+          loading: true,
+          error: false
+        };
+      case actionTypes.FETCH_STREAM_SUCCESS:
+        return {
+          ...state,
+          stream: {
+            ...state.stream,
+            [action.stream.id]: action.stream
+          },
+          loading: false,
+          error: false
+        };
+      case actionTypes.FETCH_STREAM_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: true
+        };
+
     default:
       return state;
   }
