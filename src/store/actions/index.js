@@ -1,2 +1,8 @@
 export { signIn, signOut } from "./auth";
-export { createStream } from "./streams";
+export {
+  createStream,
+  fetchStreams,
+  fetchStream,
+  editStream,
+  deleteStream
+} from "./streams";
