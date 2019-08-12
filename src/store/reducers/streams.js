@@ -8,6 +8,28 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.FETCH_STREAMS_START:
+      return {
+        ...state,
+        loading: true,
+        error: false
+      };
+    case actionTypes.FETCH_STREAMS_SUCCESS:
+      return {
+        ...state,
+        stream: {
+          ...state.stream,
+          ..._.mapKeys(action.streams, "id")
+        },
+        loading: false,
+        error: false
+      };
+    case actionTypes.FETCH_STREAMS_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: true
+      };
     case actionTypes.CREATE_STREAM_START:
       return {
         ...state,
