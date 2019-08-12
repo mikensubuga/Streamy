@@ -142,10 +142,10 @@ export const deleteStreamStart = () => {
   };
 };
 
-export const deleteStreamSuccess = res => {
+export const deleteStreamSuccess = id => {
   return {
     type: actionTypes.DELETE_STREAM_SUCCESS,
-    res: res
+    payload: id
   };
 };
 
@@ -162,7 +162,7 @@ export const deleteStream = id => {
     streams
       .delete(`/streams/${id}`)
       .then(res => {
-        dispatch(deleteStreamSuccess(res.data));
+        dispatch(deleteStreamSuccess(id));
       })
       .catch(err => {
         dispatch(deleteStreamFail(err));

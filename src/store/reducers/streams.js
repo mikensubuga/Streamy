@@ -1,3 +1,4 @@
+import _ from "lodash";
 import * as actionTypes from "../actions/actionTypes";
 const initialState = {
   stream: {},
@@ -76,6 +77,24 @@ const reducer = (state = initialState, action) => {
         error: true
       };
 
+    case actionTypes.DELETE_STREAM_START:
+      return {
+        ...state,
+        loading: true,
+        error: false
+      };
+    case actionTypes.DELETE_STREAM_SUCCESS:
+      return _.omit(initialState, action.payload);
+
+    // loading: false,
+    // error: false
+
+    case actionTypes.DELETE_STREAM_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: true
+      };
     default:
       return state;
   }
