@@ -20,10 +20,11 @@ export const createStreamFail = error => {
   };
 };
 export const createStream = formValues => {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(createStreamStart());
+    const { userId } = getState().auth;
     streams
-      .post("/streams", formValues)
+      .post("/streams", { ...formValues, userId })
       .then(res => {
         dispatch(createStreamSuccess(res.data));
       })
