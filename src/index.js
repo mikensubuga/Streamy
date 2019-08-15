@@ -2,11 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, compose, applyMiddleware, combineReducers } from "redux";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 import authReducer from "./store/reducers/auth";
 import streamsReducer from "./store/reducers/streams";
 import { reducer as formReducer } from "redux-form";
 import thunk from "redux-thunk";
+import history from "./history";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -25,9 +26,9 @@ const store = createStore(
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
+    <Router history={history}>
       <App />
-    </BrowserRouter>
+    </Router>
   </Provider>
 );
 ReactDOM.render(app, document.getElementById("root"));

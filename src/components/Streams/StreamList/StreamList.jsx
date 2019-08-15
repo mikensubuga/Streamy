@@ -44,10 +44,15 @@ class StreamList extends Component {
   }
   render() {
     return (
-      <div>
-        <h2>Streams</h2>
-        <div className="ui celled list">{this.renderList()}</div>
-        {this.renderCreate()}
+      <div className="ui grid">
+        <div className="twelve wide column">
+          <div>
+            <h2 className="ui block header">Streams</h2>
+
+            <div className="ui celled list">{this.renderList()}</div>
+            {this.renderCreate()}
+          </div>
+        </div>
       </div>
     );
   }
