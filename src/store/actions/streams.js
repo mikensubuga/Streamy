@@ -1,6 +1,6 @@
 import streams from "../../apis/streams";
 import * as actionTypes from "./actionTypes";
-
+import history from "../../history";
 export const createStreamStart = () => {
   return {
     type: actionTypes.CREATE_STREAM_START
@@ -27,6 +27,7 @@ export const createStream = formValues => {
       .post("/streams", { ...formValues, userId })
       .then(res => {
         dispatch(createStreamSuccess(res.data));
+        history.push("/");
       })
       .catch(err => {
         dispatch(createStreamFail(err));
