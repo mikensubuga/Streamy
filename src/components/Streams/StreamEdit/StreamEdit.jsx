@@ -9,4 +9,4 @@ const mapStateToProps = (state, ownProps) => {
     stream: state.streams.stream[ownProps.match.params.id]
   };
 };
-export default StreamEdit;
+export default connect(StreamEdit);
