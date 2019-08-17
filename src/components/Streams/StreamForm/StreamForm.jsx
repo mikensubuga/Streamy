@@ -24,34 +24,20 @@ class StreamForm extends Component {
   render() {
     console.log("render", this.props);
     return (
-      <div className="ui grid">
-        <div className="twelve wide column">
-          <div>
-            <h2 className="ui block header">StreamCreate</h2>
-            <form
-              onSubmit={this.props.handleSubmit(this.onSubmit)}
-              className="ui form error"
-            >
-              <Field
-                name="title"
-                component={this.renderInput}
-                label="Enter Title"
-              />
-              <Field
-                name="description"
-                component={this.renderInput}
-                label="Enter Description"
-              />
-              <button
-                className="ui button primary"
-                disabled={this.props.invalid}
-              >
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
+      <form
+        onSubmit={this.props.handleSubmit(this.onSubmit)}
+        className="ui form error"
+      >
+        <Field name="title" component={this.renderInput} label="Enter Title" />
+        <Field
+          name="description"
+          component={this.renderInput}
+          label="Enter Description"
+        />
+        <button className="ui button primary" disabled={this.props.invalid}>
+          Submit
+        </button>
+      </form>
     );
   }
 }
