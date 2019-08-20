@@ -131,6 +131,7 @@ export const editStream = (id, formValues) => {
       .put(`/streams/${id}`, formValues)
       .then(res => {
         dispatch(editStreamSuccess(res.data));
+        history.push("/");
       })
       .catch(err => {
         dispatch(editStreamFail(err));
