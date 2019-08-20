@@ -128,7 +128,7 @@ export const editStream = (id, formValues) => {
   return dispatch => {
     dispatch(editStreamStart());
     streams
-      .put(`/streams/${id}`, formValues)
+      .patch(`/streams/${id}`, formValues)
       .then(res => {
         dispatch(editStreamSuccess(res.data));
         history.push("/");
