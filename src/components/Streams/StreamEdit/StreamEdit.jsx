@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import StreamForm from "../StreamForm/StreamForm";
@@ -22,8 +23,9 @@ class StreamEdit extends Component {
             <h2 className="ui block header">{this.props.stream.title}</h2>
             <StreamForm
               onSubmit={this.onSubmit}
-              initialValues={this.props.stream}
+              // initialValues={this.props.stream}
               // initialValues={{ title: "Edit me", description: "change me" }}
+              initialValues={_.pick(this.props.stream, "title", "description")}
             />
           </div>
         </div>
