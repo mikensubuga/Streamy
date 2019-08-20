@@ -6,6 +6,10 @@ class StreamEdit extends Component {
   componentDidMount() {
     this.props.onfetchStream(this.props.match.params.id);
   }
+
+  onSubmit = formValues => {
+    console.log(formValues);
+  };
   render() {
     console.log(this.props);
     if (!this.props.stream) {
@@ -16,7 +20,11 @@ class StreamEdit extends Component {
         <div className="twelve wide column">
           <div>
             <h2 className="ui block header">{this.props.stream.title}</h2>
-            <StreamForm onSubmit={this.onSubmit} />
+            <StreamForm
+              onSubmit={this.onSubmit}
+              initialValues={this.props.stream}
+              // initialValues={{ title: "Edit me", description: "change me" }}
+            />
           </div>
         </div>
       </div>
@@ -34,6 +42,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onfetchStream: id => {
       dispatch(actions.fetchStream(id));
+    },
+    onEditStream: (id, formValues) => {
+      dispatch(actions.editStream(id, formValues));
     }
   };
 };
