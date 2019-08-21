@@ -87,7 +87,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         stream: {
           ...state.stream,
-          [action.stream.id]: action.response
+          ..._.mapKeys(action.response, "id")
+
+          // [action.stream.id]: action.response
         },
         loading: false,
         error: false

@@ -130,11 +130,14 @@ export const editStream = (id, formValues) => {
     streams
       .patch(`/streams/${id}`, formValues)
       .then(res => {
+        console.log("edit res", res.data);
+
         dispatch(editStreamSuccess(res.data));
         history.push("/");
       })
       .catch(err => {
         dispatch(editStreamFail(err));
+        console.log("error", err);
       });
   };
 };
