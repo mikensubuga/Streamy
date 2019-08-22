@@ -15,14 +15,24 @@ class StreamDelete extends Component {
       </React.Fragment>
     );
   }
+  renderContent() {
+    if (!this.props.stream) {
+      return "Are you sure you want to delete this stream?";
+    }
 
+    return `Are you sure you want to delete the stream with title: ${
+      this.props.stream.title
+    }`;
+  }
   render() {
+    if (!this.props.stream) {
+      return <div>Loading ...</div>;
+    }
     return (
       <div>
-        StreamDelete
         <Modal
           header="Delete"
-          content="Are you sure you want to Delete this Stream?"
+          content={this.renderContent()}
           actions={this.renderActions()}
           onDismiss={() => history.push("/")}
         />
@@ -30,6 +40,13 @@ class StreamDelete extends Component {
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    stream: state.streams.stream[ownProps.match.params.id]
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     onfetchStream: id => {
@@ -38,6 +55,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(StreamDelete);
