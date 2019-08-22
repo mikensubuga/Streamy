@@ -3,15 +3,23 @@ import Modal from "../../UI/Modal";
 import history from "../../../history";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
+import { Link } from "react-router-dom";
 class StreamDelete extends Component {
   componentDidMount() {
     this.props.onfetchStream(this.props.match.params.id);
   }
+  onDelete = () => {
+    this.props.onDeleteStream(this.props.match.params.id);
+  };
   renderActions() {
     return (
       <React.Fragment>
-        <button className="ui button">Cancel</button>
-        <button className="ui negative button">Delete</button>
+        <Link to="/" className="ui button">
+          Cancel
+        </Link>
+        <button className="ui negative button" onClick={this.onDelete}>
+          Delete
+        </button>
       </React.Fragment>
     );
   }
@@ -49,6 +57,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    onDeleteStream: id => {
+      dispatch(actions.deleteStream(id));
+    },
     onfetchStream: id => {
       dispatch(actions.fetchStream(id));
     }

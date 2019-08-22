@@ -169,6 +169,7 @@ export const deleteStream = id => {
       .delete(`/streams/${id}`)
       .then(res => {
         dispatch(deleteStreamSuccess(id));
+        history.push("/");
       })
       .catch(err => {
         dispatch(deleteStreamFail(err));
