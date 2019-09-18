@@ -31,7 +31,7 @@ class StreamList extends Component {
 
           <i className="large middle aligned icon camera" />
           <div className="content">
-            <Link to={`/streams/${stream.id}`} className="header">
+            <Link to={`/streams/show/${stream.id}`} className="header">
               {stream.title}
             </Link>
             <div className="description">{stream.description}</div>
