@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import flv from "flv.js";
+import { thisTypeAnnotation } from "@babel/types";
 
 class StreamShow extends Component {
   constructor(props) {
@@ -12,6 +13,9 @@ class StreamShow extends Component {
     const { id } = this.props.match.params;
     this.props.onfetchStream(id);
     this.buildPlayer();
+  }
+  componentWillUnmount() {
+    this.player.destroy();
   }
   componentDidUpdate() {
     this.buildPlayer();
